@@ -100,6 +100,21 @@ paths:
       operationId: getDailyAlmanac
       description: |
         Get almanac of today.
+      parameters:
+        - in: header
+          name: Accept-Language
+          type: string
+          required: false
+          description: |
+            Locale string in RFC format, like en-US, zh-CN, en, zh
+
+        - in: query
+          name: locale
+          type: string
+          required: false
+          description: |
+            Locale string in RFC format, like en-US, zh-CN, en, zh
+
       produces:
         - application/json
       responses:

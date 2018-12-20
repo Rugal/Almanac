@@ -1,6 +1,7 @@
 package config;
 
 import ga.rugal.almanac.springmvc.controller.PackageInfo;
+import ga.rugal.almanac.springmvc.interceptor.AcceptLanguageInterceptor;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.ContentNegotiationConfi
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.handler.AbstractHandlerMapping;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
@@ -41,6 +43,8 @@ public class SpringMvcApplicationContext implements WebMvcConfigurer {
 
   /**
    * Handler adapter.
+   *
+   * @return
    */
   @Bean
   public HandlerAdapter handlerAdapter() {
@@ -49,12 +53,19 @@ public class SpringMvcApplicationContext implements WebMvcConfigurer {
 
   /**
    * Handler mapping.
+   *
+   * @return
    */
   @Bean
   public AbstractHandlerMapping defaultAnnotationHandlerMapping() {
     final RequestMappingHandlerMapping mapping = new RequestMappingHandlerMapping();
     mapping.setUseSuffixPatternMatch(false);
     return mapping;
+  }
+
+  @Override
+  public void addInterceptors(final InterceptorRegistry registry) {
+    registry.addInterceptor(new AcceptLanguageInterceptor()).addPathPatterns("/");
   }
 
   @Override

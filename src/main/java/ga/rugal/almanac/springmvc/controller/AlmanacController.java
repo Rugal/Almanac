@@ -1,14 +1,12 @@
 package ga.rugal.almanac.springmvc.controller;
 
 import java.util.Optional;
-
 import javax.servlet.http.HttpServletRequest;
 
 import ga.rugal.almanac.swagger.api.AlmanacApi;
 import ga.rugal.almanac.swagger.request.AlmanacDto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
@@ -21,8 +19,9 @@ import org.springframework.stereotype.Controller;
 public class AlmanacController implements AlmanacApi {
 
   @Override
-  public ResponseEntity<AlmanacDto> getDailyAlmanac() {
-    return new ResponseEntity<>(HttpStatus.OK);
+  public ResponseEntity<AlmanacDto> getDailyAlmanac(final String acceptLanguage,
+                                                    final String locale) {
+    return AlmanacApi.super.getDailyAlmanac(acceptLanguage, locale);
   }
 
   @Override

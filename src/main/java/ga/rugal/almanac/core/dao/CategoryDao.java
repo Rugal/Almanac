@@ -5,6 +5,4 @@ import ga.rugal.almanac.core.entity.Category;
 import org.springframework.data.repository.CrudRepository;
 
 public interface CategoryDao extends CrudRepository<Category, Integer> {
-
-  //findOne, delete, save, count, etc., are inherited from CruiRepository
 }

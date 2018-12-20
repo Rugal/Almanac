@@ -28,8 +28,7 @@ CREATE TABLE translation (
     tid serial PRIMARY KEY,
     hid integer REFERENCES hexagram(hid),
     lid integer REFERENCES locale(lid),
-    is_title boolean,
-    is_aspicious boolean,
+    is_aspicious boolean DEFAULT NULL,
     content character varying(100)
 );
 
