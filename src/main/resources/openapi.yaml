@@ -1,0 +1,121 @@
+swagger: '2.0'
+info:
+  title: Developer Almanac
+  version: 1.0.0
+  description: Daily almanac for software development engineer API documentation
+  # put the contact info for your development or API team
+  contact:
+    email: rugal.bernstein.0@gmail.com
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+#  ----------------------------------------------------------
+
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /RugalBernstein/almanac/1.0.0
+schemes:
+ - https
+ - http
+ 
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+
+#  ----------------------------------------------------------
+
+# tags are used for organizing operations
+tags:
+- name: almanac
+  description: Overall almanac operations
+
+#  ----------------------------------------------------------
+
+definitions:
+  Response204:
+    description:  Resource deleted
+  Response400:
+    description:  Bad request
+  Response401:
+    description:  Request not authenticated
+  Response403:
+    description:  Request not authorized
+  Response404:
+    description:  Resource not found
+  Response405:
+    description:  Request method not found
+  Response406:
+    description:  Response representation not negotiable
+  Response409:
+    description:  Resource conflicted
+
+  Hexa:
+    type: object
+    properties:
+      title:
+        type: string
+      explanation:
+        type: string
+
+  Content:
+    type: object
+    properties:
+      aspicious:
+        type: array
+        items:
+          $ref: '#/definitions/Hexa'
+      inaspicious:
+        type: array
+        items:
+          $ref: '#/definitions/Hexa'
+
+  Almanac:
+    type: object
+    properties:
+      date:
+        type: string
+      direction:
+        type: string
+      beverage:
+        type: array
+        items:
+          type: string
+      godness:
+        type: integer
+      content:
+        $ref: '#/definitions/Content'
+
+#  ----------------------------------------------------------
+
+path:
+  /almanac:
+    get:
+      tags:
+        - almanac
+      summary: Get daily almanac
+      operationId: getDailyAlmanac
+      description: |
+        Get almanac of today.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Get almanac
+          schema:
+            $ref: '#/definitions/Almanac'
+        401:
+          $ref: '#/definitions/Response401'
+        403:
+          $ref: '#/definitions/Response403'
+        404:
+          $ref: '#/definitions/Response404'
+        405:
+          $ref: '#/definitions/Response405'
+        406:
+          $ref: '#/definitions/Response406'
+
+#  ----------------------------------------------------------

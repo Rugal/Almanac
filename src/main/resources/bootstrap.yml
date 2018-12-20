@@ -1,0 +1,13 @@
+# Put as few code as possible
+# Only most fundamental configuration that bootstrap Spring-Boot application
+
+# Spring Cloud Config
+# Should have only one Spring Cloud Config
+spring:
+  application:
+    # Change this name for new micro service every time
+    name: upgrade
+  cloud:
+    config:
+        uri: http://localhost:8080
+        enabled: false
