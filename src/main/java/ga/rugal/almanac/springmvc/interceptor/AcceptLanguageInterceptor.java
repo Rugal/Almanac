@@ -4,6 +4,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import config.Constant;
 import config.SystemDefaultProperty;
 
 import ga.rugal.almanac.core.entity.Locale;
@@ -30,8 +31,6 @@ public class AcceptLanguageInterceptor implements HandlerInterceptor {
 
   private static final String CONTENT_LANGUAGE = "content-language";
 
-  private static final String LOCALE = "locale";
-
   private static final String DASH = "-";
 
   @Autowired
@@ -56,26 +55,27 @@ public class AcceptLanguageInterceptor implements HandlerInterceptor {
                            final HttpServletResponse response,
                            final Object handler) throws Exception {
     //The default locale
-    request.setAttribute(LOCALE, SystemDefaultProperty.DEFAULT_LOCALE);
+    request.setAttribute(Constant.LOCALE, SystemDefaultProperty.DEFAULT_LOCALE);
 
     //first by query parameter
-    final String queryLocale = this.matchLocale(request.getParameter(LOCALE));
+    final String queryLocale = this.matchLocale(request.getParameter(Constant.LOCALE));
     if (!StringUtils.isEmpty(queryLocale)) {
-      request.setAttribute(LOCALE, queryLocale);
-      LOG.debug(String.format("Use locale %s from query parameter", request.getAttribute(LOCALE)));
+      request.setAttribute(Constant.LOCALE, queryLocale);
+      LOG.debug(String.format("Use locale %s from query parameter",
+                              request.getAttribute(Constant.LOCALE)));
       return true;
     }
 
     //then by header
     final String headerLocale = this.getLocaleByHeader(request);
     if (!StringUtils.isEmpty(headerLocale)) {
-      request.setAttribute(LOCALE, headerLocale);
-      LOG.debug(String.format("Use locale %s from header", request.getAttribute(LOCALE)));
+      request.setAttribute(Constant.LOCALE, headerLocale);
+      LOG.debug(String.format("Use locale %s from header", request.getAttribute(Constant.LOCALE)));
       return true;
     }
 
     //lastly use default locale
-    LOG.debug(String.format("Use default locale %s", request.getAttribute(LOCALE)));
+    LOG.debug(String.format("Use default locale %s", request.getAttribute(Constant.LOCALE)));
     return true;
   }
 
@@ -149,7 +149,7 @@ public class AcceptLanguageInterceptor implements HandlerInterceptor {
                          final HttpServletResponse response,
                          final Object handler,
                          final ModelAndView mav) throws Exception {
-    response.setHeader(CONTENT_LANGUAGE, (String) request.getAttribute(LOCALE));
+    response.setHeader(CONTENT_LANGUAGE, (String) request.getAttribute(Constant.LOCALE));
   }
 
   @Override

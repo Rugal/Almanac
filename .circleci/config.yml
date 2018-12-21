@@ -1,0 +1,64 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk-node-browsers
+        environment:
+          SPRING_PROFILES_ACTIVE: ci
+      - image: circleci/postgres:10-alpine-ram
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: circletest
+
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-almanac-{{ checksum "pom.xml" }}
+      - run: mvn dependency:go-offline
+      - run: mvn -Dflyway.configFile=src/main/resources/db/${SPRING_PROFILES_ACTIVE}.properties flyway:clean flyway:migrate
+      - run: mvn clean -Dskip.surefire.tests=false -D=skip.failsafe.tests=false verify
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/junit/
+            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/junit/ \;
+            find . -type f -regex ".*/target/failsafe-reports/.*xml" -exec cp {} ~/junit/ \;
+          when: always
+      - store_test_results:
+          path: ~/junit
+      - run: mvn clean package
+      - store_artifacts:
+          path: target/Deliverable.jar
+      - save_cache:
+          key: v1-almanac-{{ checksum "pom.xml" }}
+          paths:
+            - ~/.m2
+
+# https://circleci.com/docs/2.0/workflows/#using-contexts-and-filtering-in-your-workflows
+  deploy:
+    docker:
+      - image: circleci/openjdk:8-jdk-node-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-almanac-{{ checksum ".circleci/install-and-activate-google-cloud-sdk.sh" }}
+      - run: /bin/bash .circleci/install-and-activate-google-cloud-sdk.sh
+      - run: mvn -Dflyway.configFile=src/main/resources/db/flyway_production.properties flyway:migrate
+      - save_cache:
+          key: v1-almanac-{{ checksum ".circleci/install-and-activate-google-cloud-sdk.sh" }}
+          paths:
+            - ~/.m2
+      - run: mvn appengine:deploy
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^v.*/

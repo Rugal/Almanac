@@ -1,7 +1,7 @@
 package config;
 
 /**
- * Some system level properties.
+ * Some system level property.
  *
  * @author Rugal Bernstein
  */
