@@ -49,6 +49,8 @@ public class AlmanacController implements AlmanacApi {
   @Override
   public ResponseEntity<AlmanacDto> getDailyAlmanac(final String headerLocale,
                                                     final String queryLocale) {
+    //Get I18N almanac
+    //Get translation by locale
     final String locale = this.getLocale(this.request);
     System.out.println(locale);
     return new ResponseEntity(HttpStatus.OK);

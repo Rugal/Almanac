@@ -154,7 +154,7 @@
         <version>3.0.0</version>
         <configuration>
           <configLocation>configuration/checkstyle.xml</configLocation>
-          <excludes></excludes>
+          <excludes>**/mapper/**</excludes>
           <encoding>UTF-8</encoding>
           <consoleOutput>true</consoleOutput>
           <failsOnError>true</failsOnError>

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "programmer-almanac",
+  "private_key_id": "16c0031342476a01a59ca372392c0fde3161b9ac",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCDfI0VmRyhStod\nagxHKEZr95K1ZlG/hAkmecX6rs31HuE9dXFHVKthfCH5JOuY/wOsWA3IcqwNzRui\nVe1EZtZe84tKuVH5hnBe3yzFpwvRmYjogjq4sg50vvpg95oAGAQRlmkgOr7OM35x\n5NN1j1AZMTQINmobddfjHPig2yOtpLEbV0zN7W3B9rhmAKX3X/IC6XVOFF0woT4n\n0pCr389+9uf57hXWEXYp4okXfoPHLpmhVnSstHGNXQztjjzvZZ39Fq5toWUHtghj\njFJP/EGJSjGQaqCuB1pRyl613SjEK5bzFBok7rWUXfI1wM86SWmcxa0gsV6vBnnN\nHJzyucANAgMBAAECggEADILhedij3MUelAXvPSYb7VIVZ6VgyfRqWnrj18KiXlyd\n2hc+vCbWV+RT5z0YHerGErQeO6CNtpJ5uqyqcwPGCirqaiXQIwojzyM1Q2ltunf9\niwI5TDHFJl61vFxTDwc5++JwBl0QotZLhdLcPCdy27LO3Kkw14QTEs1C6ytu7arH\nNRhgicTt+/qnj5nWVW2NNrcz+T9zf5TsMdHmm9b5JH+VsOdw2l9vpOOVcE7kGYEt\nRtPczXF/Rkqz82Dp5D4Biq9mwOSze+kRb2oel1TE4wi4PU0wT6Q4R9JidRdbnxFT\nqw/1En6SW1AVBNG+3MxCGeB7VqwtYC3C9zMhhf3JkQKBgQC3f5PmQalZO4lglr+s\nWIds92cItFw9JUeopU+bJizF/q2QX/o4nV1S3kdq1FTqsOHiC3bVc+7KvVtB4uAO\nzTZVXk44Iq5kUkSZG5oQT7+Yd6iL7MnMY/5ky3auN0//F6amTrdPz4Nsv48d5a2F\nv9uCh6RR10sipSJn9LjJznG8KwKBgQC3cBne/QQ2pJ15izbhBPzdisDggz8SyIAE\nkOA2JhDCa7sMX8bMj+Las77R6P+1UIqCYcXbRKozDf8S4RmvJ0eDYNaGX39ijTCE\ncaxjHIHIcM5XZK2SPlq83w3OuufGuKG6b/7bo5i8MSglEOfzACFtUR/ULasJHp3S\n6gnPJ5gApwKBgBz1pnrVbAuoKMM0p2Vkx2K8HOezx0bjJk8IX+rleHV6/xtk+lGL\nDFpyuCS1A/3SEqQhGQ0Q8ePPRKK+UowjeOq6KnATkSBGF4tuXr8qRtuiLth+c06t\njU2NCtrt4dMpgWSH0chnwJ8eEFEwmVUddWBBVf6QkswR8b8kUTGQQkTnAoGAfITd\nGvA3lvwhZWsp4o9nMt/IU97jxtVRiUfq2vb183P7scemBCA8BudyxbzbL3Ivw5ep\nHlG7ExMSLfedXrdUJQtsNCTJLNXYtF8RfOnR84UXnF1cMWSgZYsoLUfUo6GbLxpt\nLx0bRcw8iwSx3tMc3b7u0zH44yTkT1LNO9CNrwsCgYAoinl+aafeLY4qie+vTaD7\ng40BG7TaQmDiN/Utc5yiQEEdeUy5Z40AqObRc49D+dWQwTvQ8f8YJcAPP5whYO5L\nhsByGO9JN7KnjhOQXWcVnVZ6Z6/Rr5escWyEMaRR+lBcBWI7Py4STNL/cMsxCcsO\nse5TgfTbk3JkoM0hrMEwtg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "programmer-almanac@appspot.gserviceaccount.com",
+  "client_id": "103755898542018349881",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/programmer-almanac%40appspot.gserviceaccount.com"
+}

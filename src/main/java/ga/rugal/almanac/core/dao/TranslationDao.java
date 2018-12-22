@@ -8,7 +8,8 @@ import ga.rugal.almanac.core.entity.Translation;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface TranslationDao extends CrudRepository<Translation, Integer> {
+public interface TranslationDao extends CrudRepository<Translation, Integer>,
+                                          TranslationRepositoryCustom {
 
   List<Translation> findByHexagram(Hexagram hexagram);
 
