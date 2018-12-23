@@ -28,10 +28,10 @@ public class CompleteHexagram {
 
   public CompleteHexagram(final List<Translation> translations) {
     this(translations.stream()
-            .filter(a -> Objects.isNull(a.getAspicious()))
+            .filter(a -> Objects.isNull(a.getAuspicious()))
             .findFirst().get(),
          translations.stream()
-            .filter(a -> Objects.nonNull(a.getAspicious()))
+            .filter(a -> Objects.nonNull(a.getAuspicious()))
             .collect(Collectors.toList()));
   }
 }

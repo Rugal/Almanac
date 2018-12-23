@@ -59,14 +59,14 @@ public class TestApplicationContext {
     translation.setContent(faker.funnyName().name());
     translation.setHexagram(hexagram);
     translation.setLocale(locale);
-    translation.setAspicious(null);
+    translation.setAuspicious(null);
     return translation;
   }
 
   @Bean
   @Scope("prototype")
   public Translation explanation(final Translation title) {
-    title.setAspicious(true);
+    title.setAuspicious(true);
     return title;
   }
 }

@@ -37,8 +37,8 @@ public class Translation {
                      sequenceName = SCHEMA + "." + SEQUENCE_NAME)
   private Integer tid;
 
-  @Column(name = "is_aspicious")
-  private Boolean aspicious;
+  @Column(name = "is_auspicious")
+  private Boolean auspicious;
 
   @Column
   @Setter
