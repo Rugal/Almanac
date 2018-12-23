@@ -6,7 +6,7 @@ SET search_path = almanac;
 
 
 INSERT INTO category VALUES (1, 'editor', 'Usage of different editors');
-INSERT INTO category VALUES (2, 'naming', 'Different naming convention');
+INSERT INTO category VALUES (2, 'naming', 'Different naming conventions');
 INSERT INTO category VALUES (4, 'work', NULL);
 INSERT INTO category VALUES (5, 'language', 'Usage of different programming languages');
 INSERT INTO category VALUES (3, 'health', NULL);
