@@ -12,6 +12,12 @@ CREATE TABLE category (
     description character varying(100)
 );
 
+CREATE TABLE placeholder (
+    pid serial PRIMARY KEY,
+    cid integer REFERENCES category(cid),
+    name character varying(50)
+);
+
 CREATE TABLE locale (
     lid serial PRIMARY KEY,
     language character varying(20),
@@ -37,6 +43,7 @@ ALTER TABLE ONLY locale
 
 CREATE INDEX hexagram_cid_index ON hexagram USING btree (cid);
 CREATE INDEX translation_hid_index ON translation USING btree (hid);
+CREATE INDEX placeholder_cid_index ON placeholder USING btree (cid);
 
 --
 -- PostgreSQL database dump complete

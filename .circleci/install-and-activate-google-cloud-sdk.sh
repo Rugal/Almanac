@@ -21,5 +21,5 @@ else
     ${GCLOUD} components install app-engine-java
 fi
 
-${GCLOUD} auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+${GCLOUD} auth activate-service-account --key-file ${CIRCLE_WORKING_DIRECTORY}/.circleci/gcloud-service-key.json
 ${GCLOUD} config set project ${GCLOUD_PROJECT}

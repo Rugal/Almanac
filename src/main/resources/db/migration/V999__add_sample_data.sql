@@ -46,12 +46,34 @@ INSERT INTO translation VALUES (23, 4, 1, false, 'Winter is coming');
 INSERT INTO translation VALUES (24, 5, 1, true, 'Time to learn new programming paradigm');
 INSERT INTO translation VALUES (25, 5, 1, false, 'DO NOT wast your time');
 
-
+INSERT INTO placeholder VALUES (1, 1, 'VS Code');
+INSERT INTO placeholder VALUES (2, 1, 'Vim');
+INSERT INTO placeholder VALUES (3, 1, 'Emacs');
+INSERT INTO placeholder VALUES (4, 1, 'Notepad');
+INSERT INTO placeholder VALUES (5, 1, 'Word');
+INSERT INTO placeholder VALUES (6, 1, 'Sublime');
+INSERT INTO placeholder VALUES (7, 2, 'lowerCamelCase');
+INSERT INTO placeholder VALUES (8, 2, 'UpperCamelCase');
+INSERT INTO placeholder VALUES (9, 2, 'kebab-case');
+INSERT INTO placeholder VALUES (10, 2, 'snake_case');
+INSERT INTO placeholder VALUES (11, 5, 'Java');
+INSERT INTO placeholder VALUES (12, 5, 'Python');
+INSERT INTO placeholder VALUES (13, 5, 'C#');
+INSERT INTO placeholder VALUES (14, 5, 'PHP');
+INSERT INTO placeholder VALUES (15, 5, 'ASM');
+INSERT INTO placeholder VALUES (16, 5, 'R');
+INSERT INTO placeholder VALUES (17, 5, 'C');
+INSERT INTO placeholder VALUES (18, 5, 'C++');
+INSERT INTO placeholder VALUES (19, 5, 'Clojure');
+INSERT INTO placeholder VALUES (20, 5, 'Haskell');
+INSERT INTO placeholder VALUES (21, 5, 'Smalltalk');
+INSERT INTO placeholder VALUES (22, 5, 'Swift');
 
 SELECT pg_catalog.setval('category_cid_seq', 5, true);
 SELECT pg_catalog.setval('hexagram_hid_seq', 5, true);
 SELECT pg_catalog.setval('locale_lid_seq', 2, true);
 SELECT pg_catalog.setval('translation_tid_seq', 25, true);
+SELECT pg_catalog.setval('placeholder_pid_seq', 22, true);
 
 --
 -- PostgreSQL database dump complete
