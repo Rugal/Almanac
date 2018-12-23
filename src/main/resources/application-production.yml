@@ -1,0 +1,9 @@
+# This configuration should be fetched from Spring Cloud Config
+# environment specific configuration
+
+#Database
+jdbc:
+  driverClassName: org.postgresql.Driver
+  url: jdbc:postgresql://apointer.cj57ouxz5pke.us-east-1.rds.amazonaws.com:5432/postgres
+  username: postgres
+  password: 12345678
