@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
+import lombok.Setter;
 
 /**
  * Entity for Translation table.
@@ -40,6 +41,7 @@ public class Translation {
   private Boolean aspicious;
 
   @Column
+  @Setter
   @Size(max = 100)
   private String content;
 
