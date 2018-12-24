@@ -39,7 +39,7 @@
         <Logger name="org.hibernate" level="ERROR" additivity="false">
             <AppenderRef ref="STDOUT"/>
         </Logger>
-        <Logger name="org.springframework" level="INFO" Additivity="false">
+        <Logger name="org.springframework" level="ERROR" Additivity="false">
             <AppenderRef ref="STDOUT"/>
         </Logger>
     </Loggers>

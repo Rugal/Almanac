@@ -3,6 +3,7 @@ package config;
 import ga.rugal.almanac.core.entity.Category;
 import ga.rugal.almanac.core.entity.Hexagram;
 import ga.rugal.almanac.core.entity.Locale;
+import ga.rugal.almanac.core.entity.Placeholder;
 import ga.rugal.almanac.core.entity.Translation;
 
 import com.github.javafaker.Faker;
@@ -68,5 +69,15 @@ public class TestApplicationContext {
   public Translation explanation(final Translation title) {
     title.setAuspicious(true);
     return title;
+  }
+
+  @Bean
+  @Scope("prototype")
+  public Placeholder placeholder(final Category category, final Faker faker) {
+    final Placeholder placeholder = new Placeholder();
+    placeholder.setCategory(category);
+    placeholder.setPid(0);
+    placeholder.setName(faker.name().firstName());
+    return placeholder;
   }
 }
