@@ -4,6 +4,6 @@
   <runtime>java8</runtime>
   <!--https://cloud.google.com/appengine/docs/flexible/java/reference/app-yaml#defining_environment_variables-->
   <env-variables>
-    <env-var name="spring.profiles.active" value="Production" />
+    <env-var name="spring.profiles.active" value="production" />
   </env-variables>
 </appengine-web-app>
