@@ -25,6 +25,7 @@
     <java.version>1.8</java.version>
     <spring-cloud.version>Greenwich.RC1</spring-cloud.version>
     <swagger.codegen.package>ga.rugal.almanac.swagger</swagger.codegen.package>
+    <flyway.schemas>almanac</flyway.schemas>
   </properties>
   
   <dependencies>
@@ -359,9 +360,6 @@
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>
         <configuration>
-          <schemas>
-            <schema>almanac</schema>
-          </schemas>
           <installedBy>Rugal Bernstein</installedBy>
           <configFile>src/main/resources/db/local.properties</configFile>
         </configuration>
