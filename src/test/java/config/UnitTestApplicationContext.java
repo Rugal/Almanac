@@ -3,10 +3,12 @@ package config;
 import ga.rugal.almanac.core.dao.CategoryDao;
 import ga.rugal.almanac.core.dao.LocaleDao;
 import ga.rugal.almanac.core.dao.HexagramDao;
+import ga.rugal.almanac.core.dao.PlaceholderDao;
 import ga.rugal.almanac.core.dao.TranslationDao;
 import ga.rugal.almanac.core.service.CategoryService;
 import ga.rugal.almanac.core.service.LocaleService;
 import ga.rugal.almanac.core.service.HexagramService;
+import ga.rugal.almanac.core.service.PlaceholderService;
 import ga.rugal.almanac.core.service.TranslationService;
 
 import org.mockito.Mockito;
@@ -41,6 +43,11 @@ public class UnitTestApplicationContext {
   }
 
   @Bean
+  public PlaceholderDao placeholderDao() {
+    return Mockito.mock(PlaceholderDao.class);
+  }
+
+  @Bean
   public CategoryService categoryService() {
     return Mockito.mock(CategoryService.class);
   }
@@ -58,5 +65,10 @@ public class UnitTestApplicationContext {
   @Bean
   public TranslationService translationService() {
     return Mockito.mock(TranslationService.class);
+  }
+
+  @Bean
+  public PlaceholderService placeholderService() {
+    return Mockito.mock(PlaceholderService.class);
   }
 }
