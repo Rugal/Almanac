@@ -1,4 +1,6 @@
-package ga.rugal.almanac.springmvc.mapper;
+package ga.rugal.almanac.springmvc.mapper.almanac;
+
+import ga.rugal.almanac.springmvc.mapper.CentralConfig;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

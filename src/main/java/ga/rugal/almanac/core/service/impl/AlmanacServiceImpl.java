@@ -3,11 +3,17 @@ package ga.rugal.almanac.core.service.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import ga.rugal.almanac.core.entity.Hexagram;
 import ga.rugal.almanac.core.service.HexagramService;
 import ga.rugal.almanac.core.service.LocaleService;
+import ga.rugal.almanac.core.service.PlaceholderService;
+import ga.rugal.almanac.core.service.RandomService;
 import ga.rugal.almanac.core.service.TranslationService;
+import ga.rugal.almanac.springmvc.mapper.almanac.Almanac;
+import ga.rugal.almanac.springmvc.mapper.hexagram.CompleteHexagram;
 
 import com.google.common.collect.Lists;
 import lombok.Getter;
@@ -26,6 +32,12 @@ import org.springframework.stereotype.Service;
 public class AlmanacServiceImpl {
 
   @Autowired
+  private RandomService randomService;
+
+  @Autowired
+  private PlaceholderService placeholderService;
+
+  @Autowired
   private TranslationService translationService;
 
   @Autowired
@@ -33,23 +45,6 @@ public class AlmanacServiceImpl {
 
   @Autowired
   private LocaleService localeService;
-
-  /**
-   * Randomize number.
-   *
-   * @param dayseed   seed of day
-   * @param indexseed seed of index
-   *
-   * @return
-   */
-  private int random(final int dayseed, final int indexseed) {
-    int n = dayseed % 11117;
-    for (int i = 0; i < 100 + indexseed; i++) {
-      n = n * n;
-      n = n % 11117;
-    }
-    return n;
-  }
 
   /**
    * Pick total hexagrams from all available from DB.
@@ -66,21 +61,54 @@ public class AlmanacServiceImpl {
     final List<Hexagram> dest = new ArrayList<>(hexagrams.size());
     Collections.copy(dest, hexagrams);
     for (int i = 0; i < hexagrams.size() - size; i++) {
-      dest.remove(this.random(daySeed, i) % dest.size());
+      dest.remove(this.randomService.random(daySeed, i) % dest.size());
     }
     return dest;
+  }
+
+  /**
+   * Get complete hexagrams. If contains language, naming or editor related category, fill them.
+   *
+   * @param hexagrams random hexagram selected by random seed
+   * @param daySeed   random seed to enable random nature
+   *
+   * @return filled completed hexagrams
+   */
+  private List<CompleteHexagram> getCompleteHexagrams(final List<Hexagram> hexagrams,
+                                                      final int daySeed) {
+    final Set<Integer> cids = this.placeholderService.getDao().findDistinctCategory();
+
+    return hexagrams.stream().map((hexagram) -> {
+      final CompleteHexagram complete = this.translationService.getDao()
+        .findCompleteByHexagram(hexagram);
+      if (cids.contains(hexagram.getCategory().getCid())) {
+        //need to fill placeholder
+        this.placeholderService.fillPlaceholders(complete.getExplanations(), daySeed);
+      }
+      return complete;
+    }).collect(Collectors.toList());
   }
 
   /**
    * Get I18N almanac object.
    *
    * @param daySeed day seed to generate almanac
+   *
+   * @return completed, filled I18N almanac object
    */
-  public void getAlmanac(final int daySeed) {
-    final int numGood = this.random(daySeed, 98) % 3 + 2;
-    final int numBad = this.random(daySeed, 87) % 3 + 2;
-    this.pickTotalHexagrams(Lists.newArrayList(this.hexagramService.getDao().findAll()),
-                            daySeed,
-                            numBad + numGood);
+  public Almanac getAlmanac(final int daySeed) {
+    final int numGood = this.randomService.random(daySeed, 98) % 3 + 2;
+    final int numBad = this.randomService.random(daySeed, 87) % 3 + 1;
+    final List<Hexagram> hexagrams = this.pickTotalHexagrams(
+      Lists.newArrayList(this.hexagramService.getDao().findAll()),
+      daySeed,
+      numBad + numGood);
+    final List<CompleteHexagram> completeHexagrams = this.getCompleteHexagrams(hexagrams, daySeed);
+    Collections.shuffle(completeHexagrams);
+    return Almanac.builder()
+      .auspicious(completeHexagrams.subList(0, numGood))
+      .inauspicious(completeHexagrams.subList(numGood, numBad + numGood))
+      .approachability(this.randomService.random(daySeed, 13) % 11)
+      .build();
   }
 }
