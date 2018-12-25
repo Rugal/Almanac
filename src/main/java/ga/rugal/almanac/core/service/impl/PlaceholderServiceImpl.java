@@ -12,6 +12,7 @@ import ga.rugal.almanac.core.service.RandomService;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Service;
  * @author Rugal Bernstein
  */
 @Service
+@Slf4j
 public class PlaceholderServiceImpl implements PlaceholderService {
 
   @Autowired
@@ -39,22 +41,29 @@ public class PlaceholderServiceImpl implements PlaceholderService {
    */
   @Override
   public Translation fillPlaceholder(final Translation translation, final int daySeed) {
-    if (Objects.isNull(translation.getAuspicious())) {
+    if (Objects.nonNull(translation.getAuspicious())) {
+      //means it is explanation
+      LOG.warn("Do not pass <explanation> to this method");
       return translation;
     }
     //Get category somehow
     final Category category = translation.getHexagram().getCategory();
+    final int countByCategory = this.dao.countByCategory(category);
+    if (countByCategory <= 0) {
+      //means it is wrong category
+      LOG.warn("Pass those translations that have placeholder");
+      return translation;
+    }
     //Paginate with size 1 so as to get random page by the page number
-    final int randomPage = this.randomService.random(daySeed, 119)
-                           % this.dao.countByCategory(category);
+    final int randomPage = this.randomService.random(daySeed, 119) % countByCategory;
+    LOG.debug("Get random page [{}]", randomPage);
     final Page<Placeholder> page = this.dao.findByCategory(category,
                                                            PageRequest.of(randomPage, 1));
-    if (!page.isEmpty()) {
-      final Placeholder placeholder = page.getContent().get(0);
-      final String format = String.format("$%s$", category.getName());
-      //Override content, we may need to change this
-      translation.setContent(translation.getContent().replace(format, placeholder.getName()));
-    }
+    final Placeholder placeholder = page.getContent().get(0);
+    final String format = String.format("$%s$", category.getName());
+    LOG.debug("Replace placeholder [{}] with value [{}]", format, placeholder.getName());
+    //Override content, we may need to change this
+    translation.setContent(translation.getContent().replace(format, placeholder.getName()));
     return translation;
   }
 

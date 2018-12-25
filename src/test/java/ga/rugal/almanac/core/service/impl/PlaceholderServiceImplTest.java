@@ -35,8 +35,8 @@ public class PlaceholderServiceImplTest extends UnitTestBase {
   @Autowired
   private Placeholder placeholder;
 
-  @Resource(name = "explanation")
-  private Translation explanation;
+  @Resource(name = "title")
+  private Translation title;
 
   @MockBean
   private PlaceholderDao dao;
@@ -55,8 +55,8 @@ public class PlaceholderServiceImplTest extends UnitTestBase {
     this.service.setRandomService(this.randomService);
     //data
     this.list = Lists.newArrayList(this.placeholder);
-    this.explanation.getHexagram().getCategory().setName(LANGUAGE);
-    this.explanation.setContent(String.format("TEST %s TEST", LANGUAGE_PLACEHOLDE));
+    this.title.getHexagram().getCategory().setName(LANGUAGE);
+    this.title.setContent(String.format("TEST %s TEST", LANGUAGE_PLACEHOLDE));
     //random service
     BDDMockito.given(this.randomService.random(BDDMockito.anyInt(), BDDMockito.anyInt()))
       .willReturn(9);
@@ -65,35 +65,35 @@ public class PlaceholderServiceImplTest extends UnitTestBase {
     BDDMockito.given(this.dao.findByCategory(BDDMockito.any(), BDDMockito.any()))
       .willReturn(this.page);
     //page
-    BDDMockito.given(this.page.isEmpty()).willReturn(false);
     BDDMockito.given(this.page.getContent()).willReturn(this.list);
 
   }
 
   @Test
-  public void fillPlaceholder_null() {
-    this.explanation.setAuspicious(null);
-    Assert.assertNull(this.explanation.getAuspicious());
-    final Translation result = this.service.fillPlaceholder(this.explanation, 0);
-    Assert.assertNull(result.getAuspicious());
+  public void fillPlaceholder_isExplanation() {
+    this.title.setAuspicious(true);
+    Assert.assertNotNull(this.title.getAuspicious());
+    final Translation result = this.service.fillPlaceholder(this.title, 0);
+    Assert.assertNotNull(result.getAuspicious());
+    Assert.assertThat(result.getContent(), Matchers.is(Matchers.containsString(LANGUAGE_PLACEHOLDE)));
   }
 
   @Test
-  public void fillPlaceholder_isEmpty() {
-    BDDMockito.given(this.page.isEmpty()).willReturn(true);
-    Assert.assertNotNull(this.explanation.getAuspicious());
-    Assert.assertThat(this.explanation.getContent(),
+  public void fillPlaceholder_noCategoryFound() {
+    BDDMockito.given(this.dao.countByCategory(BDDMockito.any())).willReturn(0);
+    Assert.assertNull(this.title.getAuspicious());
+    Assert.assertThat(this.title.getContent(),
                       Matchers.is(Matchers.containsString(LANGUAGE_PLACEHOLDE)));
-    final Translation result = this.service.fillPlaceholder(this.explanation, 0);
+    final Translation result = this.service.fillPlaceholder(this.title, 0);
     Assert.assertThat(result.getContent(), Matchers.is(Matchers.containsString(LANGUAGE_PLACEHOLDE)));
   }
 
   @Test
   public void fillPlaceholder_notEmpty() {
-    Assert.assertNotNull(this.explanation.getAuspicious());
-    Assert.assertThat(this.explanation.getContent(),
+    Assert.assertNull(this.title.getAuspicious());
+    Assert.assertThat(this.title.getContent(),
                       Matchers.is(Matchers.containsString(LANGUAGE_PLACEHOLDE)));
-    final Translation result = this.service.fillPlaceholder(this.explanation, 0);
+    final Translation result = this.service.fillPlaceholder(this.title, 0);
     Assert.assertThat(result.getContent(),
                       Matchers.not(Matchers.containsString(LANGUAGE_PLACEHOLDE)));
     Assert.assertThat(result.getContent(),

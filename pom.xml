@@ -373,6 +373,7 @@
         <artifactId>swagger-codegen-maven-plugin</artifactId>
         <version>2.4.0</version>
         <configuration>
+          <skipOverwrite>true</skipOverwrite>
           <inputSpec>${project.basedir}/src/main/resources/openapi.yaml</inputSpec>
           <apiPackage>${swagger.codegen.package}.api</apiPackage>
           <modelPackage>${swagger.codegen.package}.request</modelPackage>

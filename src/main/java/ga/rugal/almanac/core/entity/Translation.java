@@ -37,6 +37,9 @@ public class Translation {
                      sequenceName = SCHEMA + "." + SEQUENCE_NAME)
   private Integer tid;
 
+  /**
+   * Use {@code null} to indicate title, otherwise indicate is explanation.
+   */
   @Column(name = "is_auspicious")
   private Boolean auspicious;
 
