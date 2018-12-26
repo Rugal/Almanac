@@ -10,17 +10,29 @@ import java.util.Locale;
  */
 public class LocaleUtil {
 
+  private static final String DASH = "-";
+
   private LocaleUtil() {
   }
 
+  /**
+   * Generate RFC formatted locale from language and country.
+   *
+   * @param language language code
+   * @param country  country code
+   *
+   * @return the first two characters of RFC formatted locale
+   */
   public static String toRfcLocaleFormat(final String language, final String country) {
-    return String.format("%s-%s", language, country.toUpperCase(Locale.ENGLISH));
+    return String.format("%s-%s",
+                         language.toLowerCase(Locale.ENGLISH),
+                         country.toUpperCase(Locale.ENGLISH));
   }
 
   /**
    * Get language code from RFC formatted locale.
    *
-   * @param rfcLocale [language]-[country]
+   * @param rfcLocale [language]-[COUNTRY]
    *
    * @return the first two characters of RFC formatted locale
    */
@@ -31,11 +43,13 @@ public class LocaleUtil {
   /**
    * Get country code from RFC formatted locale.
    *
-   * @param rfcLocale [language]-[country]
+   * @param rfcLocale [language]-[COUNTRY]
    *
    * @return the last two characters of RFC formatted locale
    */
   public static String getCountry(final String rfcLocale) {
-    return rfcLocale.toLowerCase(Locale.ENGLISH).substring(3);
+    return rfcLocale.contains(DASH)
+           ? rfcLocale.toUpperCase(Locale.ENGLISH).substring(3)
+           : "";
   }
 }

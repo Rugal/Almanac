@@ -10,11 +10,19 @@ import lombok.Data;
  * @author Rugal Bernstein
  */
 @Data
-public class Almanac {
+public class AlmanacDatabase {
 
   private List<Locale> beverage;
 
   private List<Locale> direction;
 
   private List<Hexagram> hexagram;
+
+  private List<String> language;
+
+  private List<String> naming;
+
+  private List<String> editor;
+
+  private List<String> locale;
 }

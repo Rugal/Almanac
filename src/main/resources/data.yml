@@ -129,3 +129,44 @@ direction:
     zh: 东面
   - en: North East
     zh: 东北面
+
+editor:
+  - Vim
+  - Emacs
+  - Nano
+  - Notepad
+  - Notepad++
+  - Sublime
+  - VSCode
+  - Visual Studio 2018
+  - IntelliJ
+  - Office Word
+
+language:
+  - Java
+  - Ruby
+  - Python
+  - BrainFxxK
+  - VB.NET
+  - C#
+  - C
+  - C++
+  - Clojure
+  - Haskell
+  - OCaml
+  - Javascript
+  - ASM
+  - Bash
+  - 易
+
+naming:
+  - UPPERCASE
+  - lowercase
+  - UpperCamelCase
+  - lowerCamelCase
+  - kebab-case
+  - snake_case
+
+locale:
+  - en-US
+  - zh-CN

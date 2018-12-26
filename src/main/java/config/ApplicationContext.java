@@ -2,7 +2,7 @@ package config;
 
 import java.io.InputStream;
 
-import ga.rugal.almanac.core.entity.Almanac;
+import ga.rugal.almanac.core.entity.AlmanacDatabase;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,10 +23,10 @@ public class ApplicationContext {
    * @return
    */
   @Bean
-  public Almanac almanac() {
+  public AlmanacDatabase almanac() {
     final InputStream inputStream = this.getClass()
       .getClassLoader()
       .getResourceAsStream(SystemDefaultProperty.DATA_FILE);
-    return new Yaml(new Constructor(Almanac.class)).load(inputStream);
+    return new Yaml(new Constructor(AlmanacDatabase.class)).load(inputStream);
   }
 }

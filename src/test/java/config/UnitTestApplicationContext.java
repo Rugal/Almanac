@@ -1,5 +1,9 @@
 package config;
 
+import ga.rugal.almanac.core.service.RandomService;
+
+import org.mockito.Mockito;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -9,4 +13,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class UnitTestApplicationContext {
 
+  @Bean
+  public RandomService randomService() {
+    return Mockito.mock(RandomService.class);
+  }
 }
