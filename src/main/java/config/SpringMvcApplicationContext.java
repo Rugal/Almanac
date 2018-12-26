@@ -1,7 +1,6 @@
 package config;
 
 import ga.rugal.almanac.springmvc.controller.PackageInfo;
-import ga.rugal.almanac.springmvc.interceptor.AcceptLanguageInterceptor;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -65,7 +64,7 @@ public class SpringMvcApplicationContext implements WebMvcConfigurer {
 
   @Override
   public void addInterceptors(final InterceptorRegistry registry) {
-    registry.addInterceptor(new AcceptLanguageInterceptor()).addPathPatterns("/");
+    //    registry.addInterceptor(new AcceptLanguageInterceptor()).addPathPatterns("/");
   }
 
   @Override

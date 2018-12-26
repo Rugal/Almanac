@@ -1,0 +1,131 @@
+hexagram:
+  - title:
+      en: Name variable as $naming$
+      zh: 用$naming$命名变量
+    explanation:
+      auspicious:
+        en: Lead the new trend
+        zh: 也许可以引领潮流
+      inauspicious:
+        en: Nobody will approve your PR
+        zh: 没人会批准你的PR
+  - title:
+      en: Learn $language$
+      zh: 用$language$编程
+    explanation:
+      auspicious:
+        en: Time to learn new programming paradigm
+        zh: 学习一下新的编程范式
+      inauspicious:
+        en: DO NOT wast your time
+        zh: 不要浪费时间
+  - title:
+      en: Use $editor$ in front of girl
+      zh: 在妹子面前使用$editor$编程
+    explanation:
+      auspicious:
+        en: Makes coding very efficient
+        zh: 大幅提高开发效率,而且很帅
+      inauspicious:
+        en: Girl thinks you are showing off
+        zh: 大家都觉得你在装逼
+  - title:
+      en: Smoking
+      zh: 抽根烟
+    explanation:
+      auspicious:
+        en: Coding Efficiency +35%
+        zh: 工作效率+35%
+      inauspicious:
+        en: Smoking smells
+        zh: 妹子最讨厌满身烟味的人
+  - title:
+      en: Submit job application
+      zh: 递交简历
+    explanation:
+      auspicious:
+        en: HR lady is in a good mood today
+        zh: HR小妹今天心情不错
+      inauspicious:
+        en: Winter is coming
+        zh: 最近行情不好
+  - title:
+      en: Ask for more salary
+      zh: 要求加薪
+    explanation:
+      auspicious:
+        en: We have got great investment
+        zh: 公司最近融资顺利
+      inauspicious:
+        en: Manager plans to layoff 10% employee
+        zh: 老板正好想开除几个人
+  - title:
+      en: Masturbation
+      zh: 打飞机
+    explanation:
+      auspicious:
+        en: It's been a long time
+        zh: 是时候了
+      inauspicious:
+        en: You will feel dizzy
+        zh: 完事儿之后头晕目眩
+  - title:
+      en: Workout
+      zh: 健身
+    explanation:
+      auspicious:
+        en: You need to do it
+        zh: 强身♂健体
+      inauspicious:
+        en: You are very tired
+        zh: 兄贵♂满屋
+
+beverage:
+  - en: coke
+    zh: 可乐
+  - en: sprite
+    zh: 雪碧
+  - en: fanta
+    zh: 芬达
+  - en: red tea
+    zh: 红茶
+  - en: green tea
+    zh: 红茶
+  - en: black tea
+    zh: 黑茶
+  - en: flower tea
+    zh: 花茶
+  - en: fruit tea
+    zh: 水果茶
+  - en: mineral water
+    zh: 矿泉水
+  - en: coffee
+    zh: 咖啡
+  - en: hot chocolate
+    zh: 热巧克力
+  - en: chicken soup
+    zh: 鸡汤
+  - en: ice tea
+    zh: 冰红茶
+  - en: bubble tea
+    zh: 奶茶
+  - en: just water
+    zh: 白开水
+
+direction:
+  - en: North
+    zh: 北面
+  - en: North West
+    zh: 西北面
+  - en: West
+    zh: 西面
+  - en: South West
+    zh: 西南面
+  - en: South
+    zh: 南面
+  - en: South East
+    zh: 东南面
+  - en: East
+    zh: 东面
+  - en: North East
+    zh: 东北面

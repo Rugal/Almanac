@@ -15,5 +15,5 @@ public interface SystemDefaultProperty {
 
   String DEFAULT_LOCALE = DEFAULT_LANGUAGE + "-" + DEFAULT_COUNTRY;
 
-  String SCHEMA = "almanac";
+  String DATA_FILE = "data.yml";
 }

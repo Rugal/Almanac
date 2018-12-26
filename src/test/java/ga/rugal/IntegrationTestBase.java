@@ -1,6 +1,5 @@
 package ga.rugal;
 
-import config.ApplicationContext;
 import config.TestApplicationContext;
 
 import org.junit.Ignore;
@@ -15,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  *
  * @author Rugal Bernstein
  */
-@ContextConfiguration(classes = {TestApplicationContext.class, ApplicationContext.class})
+@ContextConfiguration(classes = {TestApplicationContext.class})
 @Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest
