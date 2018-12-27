@@ -61,20 +61,19 @@ public class PlaceholderServiceImpl implements PlaceholderService {
   public Locale fillPlaceholder(final @NotNull Locale locale, final int daySeed) {
     for (String placeholder : PLACEHOLDERS) {
       final List<String> candidate = this.findCandidate(locale.getEn(), placeholder);
-      if (candidate.isEmpty()) {
-        continue;
+      if (!candidate.isEmpty()) {
+        //get random index
+        final int index = this.randomService.random(daySeed, 119) % candidate.size();
+        LOG.debug("Get random index [{}]", index);
+        //Get value by index from candidate list
+        final String value = candidate.get(index);
+        final String format = String.format("$%s$", placeholder);
+        //Override content, we may need to change this
+        LOG.debug("Replace placeholder [{}] with value [{}]", format, value);
+        locale.setEn(locale.getEn().replace(format, value));
+        locale.setZh(locale.getZh().replace(format, value));
+        break;
       }
-      //get random index
-      final int index = this.randomService.random(daySeed, 119) % candidate.size();
-      LOG.debug("Get random index [{}]", index);
-      //Get value by index from candidate list
-      final String value = candidate.get(index);
-      final String format = String.format("$%s$", placeholder);
-      //Override content, we may need to change this
-      LOG.debug("Replace placeholder [{}] with value [{}]", format, value);
-      locale.setEn(locale.getEn().replace(format, value));
-      locale.setZh(locale.getZh().replace(format, value));
-      break;
     }
     return locale;
   }

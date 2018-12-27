@@ -5,6 +5,7 @@ import java.io.InputStream;
 import ga.rugal.almanac.core.entity.AlmanacDatabase;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
@@ -14,6 +15,7 @@ import org.yaml.snakeyaml.constructor.Constructor;
  *
  * @author Rugal Bernstein
  */
+@ComponentScan(basePackageClasses = ga.rugal.almanac.core.service.PackageInfo.class)
 @Configuration
 public class ApplicationContext {
 
@@ -23,7 +25,7 @@ public class ApplicationContext {
    * @return
    */
   @Bean
-  public AlmanacDatabase almanac() {
+  public AlmanacDatabase database() {
     final InputStream inputStream = this.getClass()
       .getClassLoader()
       .getResourceAsStream(SystemDefaultProperty.DATA_FILE);

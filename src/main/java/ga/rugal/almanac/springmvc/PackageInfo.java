@@ -1,4 +1,4 @@
-package ga.rugal.almanac.springmvc.controller;
+package ga.rugal.almanac.springmvc;
 
 /**
  * For controller package scanning.

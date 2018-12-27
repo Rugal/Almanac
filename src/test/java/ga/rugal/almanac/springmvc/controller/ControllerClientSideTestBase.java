@@ -16,7 +16,8 @@ import org.springframework.web.context.WebApplicationContext;
  *
  * @author rugal
  */
-@ContextConfiguration(classes = config.SpringMvcApplicationContext.class)
+@ContextConfiguration(classes = {config.SpringMvcApplicationContext.class,
+                                 config.SpringMvcApplicationContext.class})
 @Ignore
 @SpringBootTest
 @WebAppConfiguration

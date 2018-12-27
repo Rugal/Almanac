@@ -61,18 +61,6 @@ definitions:
       explanation:
         type: string
 
-  Content:
-    type: object
-    properties:
-      aspicious:
-        type: array
-        items:
-          $ref: '#/definitions/Hexa'
-      inaspicious:
-        type: array
-        items:
-          $ref: '#/definitions/Hexa'
-
   Almanac:
     type: object
     properties:
@@ -84,10 +72,16 @@ definitions:
         type: array
         items:
           type: string
-      approachability:
+      godness:
         type: integer
-      content:
-        $ref: '#/definitions/Content'
+      aspicious:
+        type: array
+        items:
+          $ref: '#/definitions/Hexa'
+      inaspicious:
+        type: array
+        items:
+          $ref: '#/definitions/Hexa'
 
 #  ----------------------------------------------------------
 

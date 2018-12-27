@@ -117,11 +117,10 @@ public class AcceptLanguageInterceptor implements HandlerInterceptor {
       return null;
     }
     final String language = LocaleUtil.getLanguage(localeString);
-    final String country = LocaleUtil.getCountry(localeString);
 
     for (String locale : this.database.getLocale()) {
       if (locale.startsWith(language)) {
-        return LocaleUtil.toRfcLocaleFormat(language, country);
+        return locale;
       }
     }
     //after all, use this as default

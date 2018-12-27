@@ -16,7 +16,7 @@ import lombok.Value;
  */
 @Builder
 @Value
-public class Almanac {
+public class LocalizedAlmanac {
 
   private Date date;
 

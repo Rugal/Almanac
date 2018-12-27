@@ -3,4 +3,7 @@
   <Match>
     <Package name="~ga\.rugal\.almanac\.swagger.*" />
   </Match>
+  <Match>
+    <Package name="~.*\.mapper\..*" />
+  </Match>
 </FindBugsFilter>

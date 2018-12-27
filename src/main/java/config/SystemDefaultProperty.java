@@ -11,7 +11,7 @@ public interface SystemDefaultProperty {
 
   String DEFAULT_LANGUAGE = "en";
 
-  String DEFAULT_COUNTRY = "us";
+  String DEFAULT_COUNTRY = "US";
 
   String DEFAULT_LOCALE = DEFAULT_LANGUAGE + "-" + DEFAULT_COUNTRY;
 

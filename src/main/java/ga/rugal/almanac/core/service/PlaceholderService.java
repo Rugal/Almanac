@@ -24,7 +24,7 @@ public interface PlaceholderService {
   Locale fillPlaceholder(@NotNull Locale locale, int daySeed);
 
   /**
-   * Fill placeholder across all translations.Only work on explanation.
+   * Fill placeholder across all locales.
    *
    * @param hexagrams content to translate
    * @param daySeed   seed for generating number

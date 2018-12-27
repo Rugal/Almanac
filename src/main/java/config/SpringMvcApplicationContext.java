@@ -1,7 +1,9 @@
 package config;
 
-import ga.rugal.almanac.springmvc.controller.PackageInfo;
+import ga.rugal.almanac.springmvc.PackageInfo;
+import ga.rugal.almanac.springmvc.interceptor.AcceptLanguageInterceptor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +30,9 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 @Configuration
 @EnableWebMvc
 public class SpringMvcApplicationContext implements WebMvcConfigurer {
+
+  @Autowired
+  private AcceptLanguageInterceptor acceptLanguageInterceptor;
 
   @Override
   public void configureDefaultServletHandling(final DefaultServletHandlerConfigurer configurer) {
@@ -64,7 +69,7 @@ public class SpringMvcApplicationContext implements WebMvcConfigurer {
 
   @Override
   public void addInterceptors(final InterceptorRegistry registry) {
-    //    registry.addInterceptor(new AcceptLanguageInterceptor()).addPathPatterns("/");
+    registry.addInterceptor(this.acceptLanguageInterceptor).addPathPatterns("/almanac");
   }
 
   @Override
