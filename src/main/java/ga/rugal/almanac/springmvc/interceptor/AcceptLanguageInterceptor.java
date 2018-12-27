@@ -57,8 +57,7 @@ public class AcceptLanguageInterceptor implements HandlerInterceptor {
     final String queryLocale = this.matchLocale(request.getParameter(Constant.LOCALE));
     if (!StringUtils.isEmpty(queryLocale)) {
       request.setAttribute(Constant.LOCALE, queryLocale);
-      LOG.debug(String.format("Use locale %s from query parameter",
-                              request.getAttribute(Constant.LOCALE)));
+      LOG.debug("Use locale [{}] from query parameter", request.getAttribute(Constant.LOCALE));
       return true;
     }
 
@@ -66,12 +65,12 @@ public class AcceptLanguageInterceptor implements HandlerInterceptor {
     final String headerLocale = this.getLocaleByHeader(request);
     if (!StringUtils.isEmpty(headerLocale)) {
       request.setAttribute(Constant.LOCALE, headerLocale);
-      LOG.debug(String.format("Use locale %s from header", request.getAttribute(Constant.LOCALE)));
+      LOG.debug("Use locale [{}] from header", request.getAttribute(Constant.LOCALE));
       return true;
     }
 
     //lastly use default locale
-    LOG.debug(String.format("Use default locale %s", request.getAttribute(Constant.LOCALE)));
+    LOG.debug("Use default locale [{}]", request.getAttribute(Constant.LOCALE));
     return true;
   }
 

@@ -2,7 +2,7 @@ package ga.rugal.almanac.core.service;
 
 import java.util.Date;
 
-import ga.rugal.almanac.springmvc.mapper.almanac.Almanac;
+import ga.rugal.almanac.core.entity.Almanac;
 
 /**
  * Almanac service interface.

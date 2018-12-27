@@ -3,13 +3,11 @@ package ga.rugal.almanac.springmvc.controller;
 import java.util.Date;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import config.Constant;
 
-import ga.rugal.almanac.core.entity.AlmanacDatabase;
+import ga.rugal.almanac.core.entity.localized.LocalizedAlmanac;
 import ga.rugal.almanac.core.service.AlmanacService;
-import ga.rugal.almanac.springmvc.mapper.almanac.Almanac;
 import ga.rugal.almanac.swagger.api.AlmanacApi;
 import ga.rugal.almanac.swagger.request.AlmanacDto;
 
@@ -20,8 +18,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Almanac controller.
@@ -38,29 +34,29 @@ public class AlmanacController implements AlmanacApi {
   @Autowired
   private AlmanacService almanacService;
 
-  @Autowired
-  private AlmanacDatabase database;
-
   @ModelAttribute
   public String getLocale(final HttpServletRequest request) {
-    assert request != null;
     return (String) request.getAttribute(Constant.LOCALE);
   }
 
+  /**
+   * Get daily almanac.<BR>
+   * 1. Get internationalization almanac object from system<BR>
+   * 2. Pick corresponding language based on locale from request<BR>
+   * 3. Transform data to DTO<BR>
+   * 4. Return
+   *
+   * @param headerLocale possible header locale
+   * @param queryLocale  possible query locale
+   *
+   * @return
+   */
   @Override
-  public ResponseEntity<AlmanacDto> getDailyAlmanac(final @RequestHeader(value = "Accept-Language",
-                                                                         required = false)
-                                                      String headerLocale,
-                                                    final @Valid @RequestParam(value = "locale", 
-                                                                               required = false)
-                                                      String queryLocale) {
-    //Get I18N almanac
-    //Get translation by locale
-    final String locale = this.getLocale(this.request);
-    LOG.info(locale);
-    final Almanac almanac = this.almanacService.getAlmanac(new Date());
-    LOG.info("{}", almanac);
-    LOG.info("{}", this.database);
+  public ResponseEntity<AlmanacDto> getDailyAlmanac(final String headerLocale,
+                                                    final String queryLocale) {
+    final LocalizedAlmanac localize = this.almanacService
+      .getAlmanac(new Date())
+      .localize(this.getLocale(this.request));
     return new ResponseEntity(HttpStatus.OK);
   }
 

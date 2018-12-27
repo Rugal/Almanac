@@ -5,13 +5,13 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import ga.rugal.almanac.core.entity.Almanac;
 import ga.rugal.almanac.core.entity.AlmanacDatabase;
 import ga.rugal.almanac.core.entity.Hexagram;
 import ga.rugal.almanac.core.entity.Locale;
 import ga.rugal.almanac.core.service.AlmanacService;
 import ga.rugal.almanac.core.service.PlaceholderService;
 import ga.rugal.almanac.core.service.RandomService;
-import ga.rugal.almanac.springmvc.mapper.almanac.Almanac;
 
 import com.google.common.collect.Lists;
 import lombok.Getter;
@@ -37,6 +37,8 @@ public class AlmanacServiceImpl implements AlmanacService {
 
   @Autowired
   private PlaceholderService placeholderService;
+
+  private Almanac cache = null;
 
   /**
    * Pick total hexagrams from all available from DB.
@@ -77,10 +79,25 @@ public class AlmanacServiceImpl implements AlmanacService {
   }
 
   /**
+   * Calculate day difference between current time and cached date.
+   *
+   * @param date current date
+   *
+   * @return day difference
+   */
+  private int dayDifference(final Date date) {
+    return (int) ((date.getTime() - this.cache.getDate().getTime()) / (1000 * 60 * 60 * 24));
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
   public Almanac getAlmanac(final Date date) {
+    if (null != this.cache && this.dayDifference(date) < 1) {
+      return this.cache;
+    }
+
     final int daySeed = this.randomService.getCurrentDateNumber(date);
     final int numGood = this.randomService.random(daySeed, 98) % 4 + 1;
     final int numBad = this.randomService.random(daySeed, 87) % 3;
@@ -91,7 +108,7 @@ public class AlmanacServiceImpl implements AlmanacService {
     this.placeholderService.fillPlaceholders(hexagrams, daySeed);
     Collections.shuffle(hexagrams);
 
-    return Almanac.builder()
+    this.cache = Almanac.builder()
       .date(date)
       .auspicious(hexagrams.subList(0, numGood))
       .inauspicious(hexagrams.subList(numGood, numBad + numGood))
@@ -99,5 +116,7 @@ public class AlmanacServiceImpl implements AlmanacService {
       .beverage(this.getBeverages(numBeverage, daySeed))
       .direction(this.getDirection(daySeed))
       .build();
+
+    return this.cache;
   }
 }

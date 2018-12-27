@@ -72,7 +72,7 @@ definitions:
         type: array
         items:
           type: string
-      godness:
+      approachability:
         type: integer
       aspicious:
         type: array

@@ -4,6 +4,9 @@
     <Package name="~ga\.rugal\.almanac\.swagger.*" />
   </Match>
   <Match>
-    <Package name="~.*\.mapper\..*" />
+    <Package name="~ga\.rugal\.almanac\.springmvc\.mapper.*" />
+  </Match>
+  <Match>
+    <Package name="~ga\.rugal\.almanac\.core\.entity.*" />
   </Match>
 </FindBugsFilter>
