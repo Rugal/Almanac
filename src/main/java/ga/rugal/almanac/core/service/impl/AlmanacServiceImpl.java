@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import ga.rugal.almanac.core.entity.Almanac;
 import ga.rugal.almanac.core.entity.AlmanacDatabase;
@@ -14,8 +15,7 @@ import ga.rugal.almanac.core.service.PlaceholderService;
 import ga.rugal.almanac.core.service.RandomService;
 
 import com.google.common.collect.Lists;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +24,8 @@ import org.springframework.stereotype.Service;
  *
  * @author Rugal Bernstein
  */
-@Getter
 @Service
-@Setter
+@Slf4j
 public class AlmanacServiceImpl implements AlmanacService {
 
   @Autowired
@@ -95,19 +94,24 @@ public class AlmanacServiceImpl implements AlmanacService {
   @Override
   public Almanac getAlmanac(final Date date) {
     if (null != this.cache && this.dayDifference(date) < 1) {
+      LOG.debug("Use cached almanac object");
       return this.cache;
     }
 
     final int daySeed = this.randomService.getCurrentDateNumber(date);
-    final int numGood = this.randomService.random(daySeed, 98) % 4 + 1;
+    final int numGood = this.randomService.random(daySeed, 98) % 3 + 1;
     final int numBad = this.randomService.random(daySeed, 87) % 3;
     final int numBeverage = this.randomService.random(daySeed, 113) % 4;
+    LOG.debug("Get day seed [{}]", daySeed);
+    LOG.debug("Auspicious [{}], Inauspicious [{}]", numGood, numBad);
 
     final List<Hexagram> hexagrams = this.getHexagrams(numGood, numBad, daySeed);
     //fill placeholder
     this.placeholderService.fillPlaceholders(hexagrams, daySeed);
     Collections.shuffle(hexagrams);
+    LOG.trace("Shuffle hexagrams");
 
+    LOG.trace(Objects.isNull(this.cache) ? "No cache found" : "Override cache");
     this.cache = Almanac.builder()
       .date(date)
       .auspicious(hexagrams.subList(0, numGood))
@@ -116,7 +120,6 @@ public class AlmanacServiceImpl implements AlmanacService {
       .beverage(this.getBeverages(numBeverage, daySeed))
       .direction(this.getDirection(daySeed))
       .build();
-
     return this.cache;
   }
 }

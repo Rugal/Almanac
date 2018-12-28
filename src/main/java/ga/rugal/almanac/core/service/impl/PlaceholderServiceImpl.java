@@ -37,17 +37,18 @@ public class PlaceholderServiceImpl implements PlaceholderService {
   private List<String> findCandidate(final String text, final String pattern) {
     final List<String> result = Lists.newArrayList();
     if (!text.contains(String.format("$%s$", pattern))) {
+      LOG.debug("Text doesn't contain pattern [{}]", pattern);
       return result;
     }
     try {
-      final Field field = AlmanacDatabase.class.getField(pattern);
+      final Field field = AlmanacDatabase.class.getDeclaredField(pattern);
       AccessController.doPrivileged((PrivilegedAction) () -> {
         field.setAccessible(true);
         return null;
       });
       return (List<String>) field.get(this.database);
     } catch (final NoSuchFieldException ex) {
-      LOG.error("Unable to find field [{}] from AlmanacDatabase class", pattern);
+      LOG.error("Unable to find field [{}] from AlmanacDatabase class", pattern, ex);
     } catch (final SecurityException | IllegalArgumentException | IllegalAccessException ex) {
       LOG.error("Not likily to happen", ex);
     }
