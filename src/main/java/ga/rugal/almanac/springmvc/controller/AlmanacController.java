@@ -8,6 +8,7 @@ import config.Constant;
 
 import ga.rugal.almanac.core.entity.localized.LocalizedAlmanac;
 import ga.rugal.almanac.core.service.AlmanacService;
+import ga.rugal.almanac.springmvc.mapper.almanac.AlmanacMapper;
 import ga.rugal.almanac.swagger.api.AlmanacApi;
 import ga.rugal.almanac.swagger.request.AlmanacDto;
 
@@ -57,7 +58,7 @@ public class AlmanacController implements AlmanacApi {
     final LocalizedAlmanac localize = this.almanacService
       .getAlmanac(new Date())
       .localize(this.getLocale(this.request));
-    return new ResponseEntity(HttpStatus.OK);
+    return new ResponseEntity(AlmanacMapper.INSTANCE.from(localize), HttpStatus.OK);
   }
 
   @Override

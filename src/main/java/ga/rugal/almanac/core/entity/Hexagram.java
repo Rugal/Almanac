@@ -2,16 +2,16 @@ package ga.rugal.almanac.core.entity;
 
 import ga.rugal.almanac.core.entity.localized.LocalizedHexagram;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Class for single hexagram.
  *
  * @author Rugal Bernstein
  */
-@AllArgsConstructor
 @Data
+@NoArgsConstructor
 public class Hexagram {
 
   private Locale title;
