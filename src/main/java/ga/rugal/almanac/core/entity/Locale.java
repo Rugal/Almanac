@@ -17,6 +17,6 @@ public class Locale {
   private String zh;
 
   public String getByLanguage(final String language) {
-    return SystemDefaultProperty.DEFAULT_LANGUAGE.equals(language) ? this.en : this.zh;
+    return language.startsWith(SystemDefaultProperty.DEFAULT_LANGUAGE) ? this.en : this.zh;
   }
 }
